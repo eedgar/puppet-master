@@ -28,4 +28,7 @@ ln -s .bash_profile .bashrc
 
 # http://www.webtatic.com/blog/2009/09/git-on-centos-5/
 # pull git repo now 
-git clone ssh://eedgar@172.16.50.1/Users/eedgar/git_repos/puppet_master.git
+
+# As root
+#rm -r /etc/puppet
+#git clone ssh://eedgar@172.16.50.1/Users/eedgar/git_repos/puppet_master.git /etc/puppet
