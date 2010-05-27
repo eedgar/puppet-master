@@ -18,6 +18,9 @@ git config --global color.diff "auto"
 git config --global pack.threads "0"
 git config --global diff.renamelimit "0"
 
+#git remote add origin ssh://eedgar@172.16.50.2/Users/eedgar/git_repos/puppet_master.git
+#git push origin master
+
 #.bash_profile
 #GIT=/usr/local/git/bin
 #export PATH=$GIT:/usr/local/bin:/usr/local/sbin:$PATH
@@ -25,4 +28,4 @@ ln -s .bash_profile .bashrc
 
 # http://www.webtatic.com/blog/2009/09/git-on-centos-5/
 # pull git repo now 
-git clone ssh://eedgar@172.16.50.1/git_repos/puppet_master.git
+git clone ssh://eedgar@172.16.50.1/Users/eedgar/git_repos/puppet_master.git
