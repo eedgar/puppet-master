@@ -32,3 +32,9 @@ ln -s .bash_profile .bashrc
 # As root
 #rm -r /etc/puppet
 #git clone ssh://eedgar@172.16.50.1/Users/eedgar/git_repos/puppet_master.git /etc/puppet
+
+
+# testing 
+#puppetmasterd --verbose --no-daemonize
+#puppetd --server localhost.localdomain --verbose --waitforcert 60 --no-daemonize
+#puppetca --list
