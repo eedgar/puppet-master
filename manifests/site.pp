@@ -1,8 +1,12 @@
-file { "/etc/passwd":
-   owner => "root",
-   group => "bin",
-   mode => 644,
+# /etc/puppet/manifests/site.pp
+
+import "classes/*"
+
+node default {
+	include sudo
 }
-package { "screen" :
-ensure => installed
+
+node puppet {
+	include ntp
+	include cobbler
 }
