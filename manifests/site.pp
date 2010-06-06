@@ -1,7 +1,12 @@
 # /etc/puppet/manifests/site.pp
 import "defaults.pp"
-import "modules.pp
-import "nodes.pp"
+import "modules.pp"
 
-class main {
+node default {
+        include screen
+}
+
+node 'shoemaker.local' inherits default {
+        include screen
+        include cobbler::full
 }

@@ -1,2 +1,11 @@
 # Explicit module import
+import "cman"
+import "cobbler"
+import "debmirror"
+import "dhcp"
+import "dns"
+import "httpd"
+import "rsync"
 import "screen"
+import "tftp"
+import "xinetd"
