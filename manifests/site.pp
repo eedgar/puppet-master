@@ -1,12 +1,7 @@
 # /etc/puppet/manifests/site.pp
+import "defaults.pp"
+import "modules.pp
+import "nodes.pp"
 
-import "classes/*"
-
-node default {
-	include sudo
-}
-
-node puppet {
-	include ntp
-	include cobbler
+class main {
 }
