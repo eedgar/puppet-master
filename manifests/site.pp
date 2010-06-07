@@ -9,4 +9,5 @@ node default {
 node 'shoemaker.local' inherits default {
         include screen
         include cobbler::full
+        include cobbler::centos
 }
