@@ -10,4 +10,5 @@ node 'shoemaker.local' inherits default {
         include screen
         include cobbler::full
         include cobbler::centos
+	sysctl::conf { "net.ipv4.ip_forward":  value => "1" }
 }

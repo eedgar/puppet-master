@@ -6,7 +6,7 @@
 # Who gets failure alerts
 email="root"
 
-repolist=`cobbler list | grep "^repo" | cut -d " "  -f 2 `
+repolist=`cobbler repo list`
 
 for repo in $repolist ; do
         cobbler reposync --only $repo

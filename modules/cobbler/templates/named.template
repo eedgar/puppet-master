@@ -1,10 +1,12 @@
 options {
-          listen-on port 53 { 127.0.0.1; };
+          listen-on port 53 { 10.0.0.254; };
+#         set this one to whatever is in resolv.conf on shoemaker
+          forwarders {10.0.2.3;};
           directory       "/var/named";
           dump-file       "/var/named/data/cache_dump.db";
           statistics-file "/var/named/data/named_stats.txt";
           memstatistics-file "/var/named/data/named_mem_stats.txt";
-          allow-query     { localhost; };
+          allow-query     { 10.0.0.0/24; };
           recursion yes;
 };
 

@@ -8,6 +8,7 @@ rpm -Uvh http://download.fedora.redhat.com/pub/epel/5/i386/epel-release-5-3.noar
 
 yum -y install ruby-rdoc
 yum -y install git-svn
+yum -y install augeas augeas-libs ruby-augeas 
 yum -y install puppet-server --enablerepo=epel
 yum -y install puppet --enablerepo=epel
 

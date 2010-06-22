@@ -66,9 +66,9 @@ class cobbler {
 		command => "/usr/bin/cobbler sync",
 		logoutput => true,
 		onlyif => "/bin/false",
-		subscribe => [ file["/etc/cobbler/settings"],
-			       file["/etc/cobbler/dhcp.template"],
-			       file["/etc/cobbler/named.template"],
+		subscribe => [ File["/etc/cobbler/settings"],
+			       File["/etc/cobbler/dhcp.template"],
+			       File["/etc/cobbler/named.template"],
 		 ]	
 	}
 	exec { cobbler-bootloaders:
@@ -92,7 +92,7 @@ class cobbler::full inherits cobbler {
 	require tftp::server::base
 	require xinetd::server::base
 	File["/etc/cobbler/settings"] {
-		require => [ Package[cobbler] , Package[dhcp]],
+		require => [ Package[cobbler] , Package[dhcp],Package[bind]],
 		content => template("cobbler/settings-full"),
 	}
 }

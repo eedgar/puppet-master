@@ -17,11 +17,12 @@ allow bootp;
 ignore client-updates;
 set vendorclass = option vendor-class-identifier;
 
-subnet 192.168.1.0 netmask 255.255.255.0 {
-     option routers             192.168.1.2;
-     option domain-name-servers 192.168.1.1;
+subnet 10.0.0.0 netmask 255.255.255.0 {
+     option routers             10.0.0.254;
+     option domain-name-servers 10.0.0.254;
+     option domain-name "pixie";
      option subnet-mask         255.255.255.0;
-     range dynamic-bootp        192.168.1.100 192.168.1.254;
+     range dynamic-bootp        10.0.0.100 10.0.0.254;
      filename                   "/pxelinux.0";
      default-lease-time         21600;
      max-lease-time             43200;
