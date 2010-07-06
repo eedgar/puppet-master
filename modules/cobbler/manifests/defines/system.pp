@@ -19,6 +19,7 @@ define cobbler::system ( $ip = false, $mac = false)
                 command => "/usr/bin/cobbler system edit --name=${name} --ip='${ip}'",
                 unless => "/usr/bin/cobbler system dumpvars --name=${name}|grep ip_address_eth0|awk -F: '{print \$2}'|grep ${ip}; test $? -eq 0",
                 logoutput => true,
+		require => Exec["cobbler_host_${name}"],
                 notify => Exec["cobbler-sync"],
 	     }
 	}
@@ -28,6 +29,7 @@ define cobbler::system ( $ip = false, $mac = false)
                 command => "/usr/bin/cobbler system edit --name=${name} --mac-address='${mac}'",
                 unless => "/usr/bin/cobbler system dumpvars --name=${name}|grep mac_address_eth0|awk -F': ' '{print \$2}'|grep ${mac}; test $? -eq 0",
                 logoutput => true,
+		require => Exec["cobbler_host_${name}"],
                 notify => Exec["cobbler-sync"],
 	     }
 	}

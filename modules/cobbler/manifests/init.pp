@@ -63,6 +63,16 @@ class cobbler {
 			content => template("cobbler/named.template"),
 	}
 	
+	file { 
+		"/etc/cobbler/zone.template":
+			mode => 755, owner => root, group => root,
+			require => Package[cobbler],
+			ensure => present,
+			path => $operatingsystem ?{
+				default => "/etc/cobbler/zone.template",
+			},
+			content => template("cobbler/zone.template"),
+	}
 	exec { cobbler-sync:
 		command => "/usr/bin/cobbler sync",
 		logoutput => true,
@@ -70,6 +80,7 @@ class cobbler {
 		subscribe => [ File["/etc/cobbler/settings"],
 			       File["/etc/cobbler/dhcp.template"],
 			       File["/etc/cobbler/named.template"],
+			       File["/etc/cobbler/zone.template"],
 		 ]	
 	}
 	exec { cobbler-bootloaders:
