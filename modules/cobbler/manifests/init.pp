@@ -1,3 +1,4 @@
+import "defines/*.pp"
 class cobbler {
 	package { cobbler:
 		name => $operatingsystem ? {
@@ -62,7 +63,7 @@ class cobbler {
 			content => template("cobbler/named.template"),
 	}
 	
-	exec { subscribe-sync:
+	exec { cobbler-sync:
 		command => "/usr/bin/cobbler sync",
 		logoutput => true,
 		onlyif => "/bin/false",

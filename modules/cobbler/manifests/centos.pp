@@ -19,6 +19,22 @@ class cobbler::centos {
 		logoutput => true,
 		unless => "/usr/bin/cobbler profile find --repos=EPEL-i386|grep centos5-i386; test $? -eq 0",
 	}
+	file { "/var/lib/cobbler/kickstarts/puppet.ks":
+                 mode => 644, owner => root, group => root,
+                        require => Package[cobbler],
+                        ensure => present,
+                        path => $operatingsystem ?{
+                                default => "/var/lib/cobbler/kickstarts/puppet.ks",
+                        },
+                        content => template("cobbler/puppet.ks"),
+        }
+	exec { puppet-profile:
+		command => "/usr/bin/cobbler profile add --name=puppet --repos='EPEL-i386 centos5.5-i386-updates' --distro=centos5-i386 --kickstart=/var/lib/cobbler/kickstarts/puppet.ks",
+		logoutput => true,
+		unless => "/usr/bin/cobbler profile list |grep puppet; test $? -eq 0",
+		notify => Exec["cobbler-sync"],
+	}
+	
 }
 #cobbler repo add --name=EPEL-i386 --priority=40 --mirror=http://download.fedora.redhat.com/pub/epel/5/i386 --mirror-locally=0
 #cobbler repo add --name=centos5.5-i386-updates --priority=70 --mirror=http://mirror.cs.vt.edu/pub/CentOS/5.5/updates/i386/ --mirror-locally=0

@@ -10,7 +10,7 @@ define cobbler::system ( $ip = false, $mac = false)
 	exec { "cobbler_host_${name}":
                 command => "/usr/bin/cobbler system add --name=${name} --profile=puppet --dns-name='${name}.pixie'",
                 logoutput => true,
-                unless => "/usr/bin/cobbler system list|awk '{print \$1}'|grep ${name}; test $? -eq 0",
+                unless => "/usr/bin/cobbler system list|grep ${name}; test $? -eq 0",
                 notify => Exec["cobbler-sync"],
 	}
 
