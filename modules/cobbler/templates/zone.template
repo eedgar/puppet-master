@@ -11,4 +11,5 @@
 
 
 shoemaker	IN	A	10.0.0.254
+puppet		IN	CNAME	shoemaker
 $host_record
