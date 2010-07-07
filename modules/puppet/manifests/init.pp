@@ -1,0 +1,41 @@
+class puppet::client {
+	package { ruby-rdoc:
+		name => $operatingsystem ? {
+			default => "ruby-rdoc"
+			},
+		ensure => present,
+	}
+	package { augeas:
+		name => $operatingsystem ? {
+			default => "augeas"
+			},
+		ensure => present,
+	}
+	package { augeas-libs:
+		name => $operatingsystem ? {
+			default => "augeas-libs"
+			},
+		ensure => present,
+	}
+	package { ruby-augeas:
+		name => $operatingsystem ? {
+			default => "ruby-augeas"
+			},
+		ensure => present,
+	}
+	package { puppet:
+		name => $operatingsystem ? {
+			default => "puppet"
+			},
+		ensure => present,
+	}
+        service { puppet:
+                name => $operatingsystem ? {
+                        default => "puppet",
+                        },
+                ensure => running,
+                enable => true,
+                hasrestart => true,
+                require => Package[puppet],
+        }
+}

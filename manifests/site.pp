@@ -3,6 +3,7 @@ import "defaults.pp"
 import "modules.pp"
 
 node default {
+        include puppet::client
         include screen
 }
 
