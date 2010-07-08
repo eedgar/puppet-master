@@ -73,6 +73,36 @@ class cobbler {
 			},
 			content => template("cobbler/zone.template"),
 	}
+
+	file { 
+		"/etc/cobbler/zone_templates":
+			mode => 755, owner => root, group => root,
+			ensure => directory,
+	}
+
+	file { 
+		"/etc/cobbler/zone_templates/10.0.0":
+			mode => 755, owner => root, group => root,
+			require => File["/etc/cobbler/zone_templates"],
+			ensure => present,
+			path => $operatingsystem ?{
+				default => "/etc/cobbler/zone_templates/10.0.0",
+			},
+			content => template("cobbler/zone_templates/10.0.0"),
+	}
+	
+	file { 
+		"/etc/cobbler/zone_templates/pixie":
+			mode => 755, owner => root, group => root,
+			require => File["/etc/cobbler/zone_templates"],
+			ensure => present,
+			path => $operatingsystem ?{
+				default => "/etc/cobbler/zone_templates/pixie",
+			},
+			content => template("cobbler/zone_templates/pixie"),
+	}
+
+
 	exec { cobbler-sync:
 		command => "/usr/bin/cobbler sync",
 		logoutput => true,
