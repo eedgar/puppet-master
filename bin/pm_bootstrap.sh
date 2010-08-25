@@ -1,10 +1,28 @@
-# VMWARE tip - (custom vnet without dhcp)
-http://communities.vmware.com/thread/108167?start=150&amp;tstart=0
+#!/bin/bash
+HOSTNAME=shoemaker.local
+PING_HOST=192.9.9.3
+USERNAME="Eric Edgar"
+EMAIL="eedgar@zenoss.com"
 
+cat > /etc/sysconfig/network << EOF
+NETWORKING=yes
+NETWORKING_IPV6=yes
+HOSTNAME=$HOSTNAME
+EOF
+hostname $HOSTNAME
 
+#/etc/init.d/network restart
 
-#rpm -Uvh http://download.fedora.redhat.com/pub/epel/5Server/x86_64/epel-release-5-3.noarch.rpm
-rpm -Uvh http://download.fedora.redhat.com/pub/epel/5/i386/epel-release-5-3.noarch.rpm
+ping -c1 $PING_HOST >/dev/null 2>&1
+ret=$?
+if [ $ret -ne 0 ]
+then
+   echo "Unable to ping $PING_HOST;  Assuming network configuration issue!"
+   echo "Exiting...."
+   exit 1
+fi
+
+rpm -Uvh http://download.fedora.redhat.com/pub/epel/5/i386/epel-release-5-3noarch.rpm
 
 yum -y install ruby-rdoc
 yum -y install git-svn
@@ -19,29 +37,19 @@ yum -y install puppet --enablerepo=epel
 # mkdir -p git_repos/puppet_master.git
 #cd git_repos/puppet_master.git
 #git --bare init
-git config --global user.name "Eric Edgar"
-git config --global user.email "eedgar@zenoss.com"
+#git remote add origin ssh://eedgar@172.16.50.2/Users/eedgar/git_repos/puppet_master.git
+#git push origin master
+git config --global user.name $USERNAME
+git config --global user.email $EMAIL
 git config --global color.branch "auto"
 git config --global color.status "auto"
 git config --global color.diff "auto"
-# 
 git config --global pack.threads "0"
 git config --global diff.renamelimit "0"
 
-#git remote add origin ssh://eedgar@172.16.50.2/Users/eedgar/git_repos/puppet_master.git
-#git push origin master
-
-#.bash_profile
-#GIT=/usr/local/git/bin
-#export PATH=$GIT:/usr/local/bin:/usr/local/sbin:$PATH
-ln -s .bash_profile .bashrc
-
-# http://www.webtatic.com/blog/2009/09/git-on-centos-5/
-# pull git repo now 
-
 # As root
-#rm -r /etc/puppet
-#git clone ssh://eedgar@172.16.50.1/Users/eedgar/git_repos/puppet_master.git /etc/puppet
+rm -r /etc/puppet
+git clone ssh://eedgar@172.16.50.1/Users/eedgar/git_repos/puppet_master.git /etc/puppet
 
 
 # testing 
@@ -121,3 +129,5 @@ vi /etc/xinetd.d/rsync disable=no
 # update puppet.ks profile
 cd /var/lib/cobbler/kickstarts
 
+# VMWARE tip - (custom vnet without dhcp)
+#http://communities.vmware.com/thread/108167?start=150&amp;tstart=0
