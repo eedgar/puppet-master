@@ -26,5 +26,5 @@ node 'cobbler2' inherits default {
 }
 
 node 'zcore301' inherits default {
-        include zenoss::core::301
+        include zenoss::core301
 }
