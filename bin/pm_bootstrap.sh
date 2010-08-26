@@ -30,6 +30,7 @@ yum -y install augeas augeas-libs ruby-augeas
 yum -y install puppet-server --enablerepo=epel
 yum -y install puppet --enablerepo=epel
 
+chkconfig puppetmaster on
 
 # this is a puppet master server ..
 # -- Notes for setting up git on remote server --
