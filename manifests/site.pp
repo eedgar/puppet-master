@@ -11,7 +11,10 @@ node default {
 }
 
 node 'shoemaker.local' inherits default {
+	# syslog
 	include syslog-ng::server
+        include puppet::server
+
         include cobbler::full
         include cobbler::centos
 	sysctl::conf { "net.ipv4.ip_forward":  value => "1" }
