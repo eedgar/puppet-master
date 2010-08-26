@@ -1,4 +1,13 @@
 class zenoss {
+        package{ mysql-server: ensure => present }
+        package{ net-snmp: ensure => present }
+        package{ net-snmp-utils: ensure => present }
+        package{ gmp: ensure => present }
+        package{ libgomp: ensure => present }
+        package{ libgcj: ensure => present }
+        package{ liberation-fonts: ensure => present }
+
+        service{ mysqld: ensure => running }
 }
 
 class zenoss::core301 inherits zenoss {
