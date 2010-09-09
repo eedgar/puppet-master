@@ -1,3 +1,6 @@
+# Global defines
+import "defines/*.pp"
+
 # Explicit module import
 import "cman"
 import "cobbler"
