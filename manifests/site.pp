@@ -16,6 +16,7 @@ node 'shoemaker.local' inherits default {
 	cobbler::system { "node03": ip => "10.0.0.203", mac => "aa:aa:bb:bb:ff:03" }
 	cobbler::system { "cobbler2": ip => "10.0.0.204", mac => "aa:aa:bb:bb:ff:04" }
 	cobbler::system { "zcore301": ip => "10.0.0.205", mac => "aa:aa:bb:bb:ff:05" }
+	cobbler::system { "zent302": ip => "10.0.0.205", mac => "aa:aa:bb:bb:ff:06" }
 }
 
 node 'cobbler2' inherits default {
