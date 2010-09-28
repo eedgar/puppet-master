@@ -1,0 +1,25 @@
+# Sample cobbler build server integration with puppet and zenoss
+# Very much a free time work in progress project but willing to show others what is out there.
+
+# This setup was created after reading sources such as
+http://number9.hellooperator.net/articles/2009/03/16/pxe-virtual-network-with-virtualbox-and-cobbler
+
+# The ultimate end goal is to be able to build a zenoss master and some monitored virtual machines all using a script or two and have everything register itself with zenoss when its done.  This infrastructure may grow in the future as I play with it.
+
+
+# The idea is to build a virtual box instance named cobbler
+it will have two nics.
+
+# These scripts have been very lightly tested.  Much more validation is required to ensure their stability.  This is a proof of concept exersize.
+
+bin/vbox_shoemaker.sh  contains a sample script to create the initial shoemaker vm. It will need to be updated to contain the path to your centos iso.  You can also adjust the initial disk size.  30Gb is used by default.  This install is currently manual and no kickstarting is done at this point.  In the future I hope to have that entirely automated.  Also this will not delete any existing disks or vms that have names used in my scripts so to reset you have to manually delete them from the virtualbox ui.  I have assumed I am using 32bit linux up until this point.  I have not done any work toward making it work on 64bit.  though it shouldnt take that much effort.
+
+Once the virtual box instance is checked out copy bin/pm_bootstrap.sh to it.  Modify the header information to suit your needs.  execute the script.  Keep in mind this is assuming you are using epel 32bit on a centos 5 box
+
+the pm bootstrap script installs git and puppet and checks out the puppet master code to /etc/puppet you may want to update this script to pull from your forked repo instead of using the one I am using.
+
+Feel free to submit patches and suggestions.
+
+Thanks,
+Eric Edgar
+

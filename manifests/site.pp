@@ -5,9 +5,16 @@ import "modules.pp"
 node default {
         include puppet::client
         include screen
+	
+	#shoemaker.local
+	$syslog_server = '10.0.0.254'
 }
 
 node 'shoemaker.local' inherits default {
+	# syslog
+	include syslog-ng::server
+        include puppet::server
+
         include cobbler::full
         include cobbler::centos
 	sysctl::conf { "net.ipv4.ip_forward":  value => "1" }
@@ -27,5 +34,6 @@ node 'cobbler2' inherits default {
 }
 
 node 'zcore301' inherits default {
-        include zenoss::core::301
+	include syslog-ng
+        include zenoss::core301
 }

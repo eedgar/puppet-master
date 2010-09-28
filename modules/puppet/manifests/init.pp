@@ -1,3 +1,15 @@
+class puppet::server {
+	file {"/srv/www/html/rrd":
+		ensure  => directory,
+	}
+
+	package { ruby-RRDtool:
+		name => $operatingsystem ? {
+			default => "ruby-RRDtool"
+			},
+		ensure => present,
+	}
+}
 class puppet::client {
 	package { ruby-rdoc:
 		name => $operatingsystem ? {
