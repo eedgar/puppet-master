@@ -15,10 +15,10 @@ class zenoss::core301 inherits zenoss {
 
 	#type=> "core or enterprise"
         #"src/stack/rpm"
-	download_file { [zenoss-3.0.1.el5.i386.rpm]:
-		site => "http://downloads.sourceforge.net/zenoss"
-		cwd => "/tmp"
-		creates => "/tmp/$name"
+	download_file { ["zenoss-3.0.1.el5.i386.rpm"]:
+		site => "http://downloads.sourceforge.net/zenoss",
+		cwd => "/tmp",
+		creates => "/tmp/$name",
 		}
 	#exec { "download-zenoss-core301":
 	#	cwd => "/root",

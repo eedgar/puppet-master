@@ -2,5 +2,6 @@ cobbler -> /etc/cobbler/zone_config (needs to be added to cobbler module)
 	-> firewall off
 	-> masquerade nat on
 
+vbox additions
 
 
